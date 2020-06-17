@@ -20,6 +20,7 @@ namespace HttpRaw2HttpwebRequest
 
         private void Button1_Click(object sender, EventArgs e)
         {
+            String host = "";
             String[] lines = richTextBox1.Text.Replace("\r", "").Split('\n');
             string[] mime = lines[0].Split(' ');
             string method = mime[0];
@@ -46,6 +47,7 @@ namespace HttpRaw2HttpwebRequest
                                 builder.Append("req.KeepAlive = true;");
                             break;
                         case "Host":
+                            host = header[1].Remove(0, 1);
                             builder.Append($"req.Host = \"{header[1].Remove(0, 1)}\";");
                             break;
                         case "Content-Length":
@@ -70,7 +72,7 @@ namespace HttpRaw2HttpwebRequest
             builder.Append("HttpWebResponse res = (HttpWebResponse)req.GetResponse();");
             builder.Append("String content = new StreamReader(res.GetResponseStream()).ReadToEnd();");
             builder.Append("Console.WriteLine(content);");
-            richTextBox1.Text = builder.ToString();
+            richTextBox1.Text = builder.ToString().Replace("string host = \"\"", $"string host = \"https://{host}\"");
         }
     }
     public class HttpWebRequestBuilder
