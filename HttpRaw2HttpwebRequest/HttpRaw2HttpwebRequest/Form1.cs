@@ -17,23 +17,9 @@ namespace HttpRaw2HttpwebRequest
         {
             InitializeComponent();
         }
-        public void test()
-        {
 
-
-
-            HttpWebRequest req = (HttpWebRequest)WebRequest.Create("{host}{path}");
-
-            
-
-
-        }
         private void Button1_Click(object sender, EventArgs e)
         {
-            #region X1
-
-            #endregion
-
             String[] lines = richTextBox1.Text.Replace("\r", "").Split('\n');
             string[] mime = lines[0].Split(' ');
             string method = mime[0];
