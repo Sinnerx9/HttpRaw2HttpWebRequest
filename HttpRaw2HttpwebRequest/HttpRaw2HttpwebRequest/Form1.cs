@@ -62,7 +62,7 @@ namespace HttpRaw2HttpwebRequest
                 }
                 else if (!String.IsNullOrWhiteSpace(lines[i]))
                 {
-                    builder.Append($"Byte[] data = Encoding.UTF8.GetBytes(\"{lines[i]}\");");
+                    builder.Append($"Byte[] data = Encoding.UTF8.GetBytes(\"{lines[i].Replace("\"","\\\"")}\");");
                     builder.Append($"req.ContentLength = data.Length;");
                     builder.Append("Stream stream = req.GetRequestStream();");
                     builder.Append("stream.Write(data, 0, data.Length);");
